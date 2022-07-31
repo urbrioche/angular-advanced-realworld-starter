@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {UserLoginInfo} from '../interfaces/login-info';
 import {LoginService} from '../login.service';
 import {catchError} from 'rxjs';
@@ -15,14 +15,19 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
+  private redirectUrl = '';
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private loginService: LoginService) {
 
   }
 
   ngOnInit(): void {
+    this.route.queryParamMap.subscribe(queryParamMap => {
+      this.redirectUrl = queryParamMap.get('redirect') || '';
+    });
   }
 
   login() {
@@ -33,7 +38,8 @@ export class LoginComponent implements OnInit {
       }))
       .subscribe((result) => {
         localStorage.setItem('token', result.user.token);
-        this.router.navigateByUrl('/');
+        // this.router.navigateByUrl('/');
+        this.router.navigateByUrl(this.redirectUrl ?? '/');
       });
   }
 }
