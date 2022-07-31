@@ -2,13 +2,13 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 col-md-offset-1 col-xs-12">
-        <form [formGroup]="form">
+        <form [formGroup]="form" (ngSubmit)="createPost()">
           <fieldset class="form-group">
             <input
               class="form-control form-control-lg"
               type="text"
               placeholder="Post Title"
-              formGroupName="title"
+              formControlName="title"
             />
           </fieldset>
           <fieldset class="form-group">
@@ -16,7 +16,7 @@
               class="form-control"
               rows="3"
               placeholder="Description"
-              formGroupName="description"
+              formControlName="description"
             ></textarea>
           </fieldset>
           <fieldset class="form-group">
@@ -24,7 +24,7 @@
               class="form-control"
               rows="8"
               placeholder="Post body"
-              formGroupName="body"
+              formControlName="body"
             ></textarea>
           </fieldset>
           <fieldset class="form-group">

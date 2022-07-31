@@ -30,4 +30,8 @@ export class CreateComponent implements OnInit {
   addTag(value: string) {
     this.form.controls.tags.push(this.fb.control(value));
   }
+
+  createPost() {
+    console.log(this.form.value);
+  }
 }
