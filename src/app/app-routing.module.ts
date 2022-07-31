@@ -3,7 +3,11 @@ import {RouterModule, Routes} from '@angular/router';
 import {LayoutComponent} from "./layout/layout.component";
 
 const routes: Routes = [
-  {path: '', component: LayoutComponent},
+  {
+    path: '',
+    component: LayoutComponent,
+    loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule)
+  },
 ];
 
 @NgModule({
