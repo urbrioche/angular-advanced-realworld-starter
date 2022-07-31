@@ -23,4 +23,11 @@ export class CreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  removeTag(index: number) {
+    this.form.controls.tags.removeAt(index);
+  }
+
+  addTag(value: string) {
+    this.form.controls.tags.push(this.fb.control(value));
+  }
 }

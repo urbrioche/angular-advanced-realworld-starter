@@ -28,12 +28,19 @@
             ></textarea>
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control" type="text" placeholder="Enter tags"/>
+            <input
+              class="form-control"
+              type="text"
+              placeholder="Enter tags"
+              #tag
+              (keyup.enter)="addTag(tag.value); tag.value=''"
+              (keydown.enter)="$event.preventDefault()"
+            />
             <div class="tag-list">
               <span class="label label-pill label-default"
                     *ngFor="let tag of form.controls.tags.controls; let i=index"
               >
-                <i class="ion-close-round"></i> {{tag.value}}</span
+                <i class="ion-close-round" (click)="removeTag(i)"></i> {{tag.value}}</span
               >
             </div>
           </fieldset>
