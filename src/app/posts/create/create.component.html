@@ -10,6 +10,11 @@
               placeholder="Post Title"
               formControlName="title"
             />
+            <ul *ngIf="form.controls.title.dirty && form.controls.title.invalid">
+              <li *ngIf="form.controls.title.errors?.['required']">
+                請輸入標題
+              </li>
+            </ul>
           </fieldset>
           <fieldset class="form-group">
             <textarea
@@ -26,6 +31,16 @@
               placeholder="Post body"
               formControlName="body"
             ></textarea>
+            <ul *ngIf="form.controls.body.dirty && form.controls.body.invalid">
+              <li *ngIf="form.controls.body.errors?.['required']">
+                請輸入內文
+              </li>
+              <li *ngIf="form.controls.body.errors?.['minlength']">
+                內文至少
+                {{ form.controls.body.errors?.['minlength']?.['requiredLength'] }}
+                個字
+              </li>
+            </ul>
           </fieldset>
           <fieldset class="form-group">
             <input
@@ -44,7 +59,11 @@
               >
             </div>
           </fieldset>
-          <button type="submit" class="btn btn-lg btn-primary pull-xs-right">
+          <button
+            type="submit"
+            class="btn btn-lg btn-primary pull-xs-right"
+            [disabled]="form.invalid"
+          >
             Create Post
           </button>
         </form>
